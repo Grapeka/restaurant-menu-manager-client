@@ -1,7 +1,7 @@
 export default function SideBar() {
   return (
     <aside className="h-full w-1/5 max-w-xs bg-gray-50" aria-label="Sidebar">
-      <div className="h-full overflow-y-auto rounded  py-4 px-3 ">
+      <div className="mt-7 h-full overflow-y-auto rounded px-3">
         <a
           href="https://flowbite.com/"
           className="mb-5 flex items-center pl-2.5"

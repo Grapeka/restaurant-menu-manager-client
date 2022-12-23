@@ -7,7 +7,11 @@ type Props = {
 
 export default function AppPage(props: Props) {
   return (
-    <div className={'flex h-screen w-screen flex-row items-center bg-gray-100'}>
+    <div
+      className={
+        'flex h-screen w-screen flex-row items-center overflow-hidden bg-gray-100'
+      }
+    >
       <SideBar />
       <div
         className={
