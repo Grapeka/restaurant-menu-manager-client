@@ -1,24 +1,45 @@
-import React, { useState } from 'react';
-import AppPage from '../../layouts/AppPage/AppPage';
+import React from 'react';
+import AppPage from '../../layouts/page/Page';
+import store from '../../redux/store';
+import { setMerchant } from '../../redux/merchant';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Signin() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
+  const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const form = event.target as HTMLFormElement;
 
-    setEmail((form[0] as HTMLInputElement).value);
-    setPassword((form[1] as HTMLInputElement).value);
+    const email = (form[0] as HTMLInputElement).value;
+    const password = (form[1] as HTMLInputElement).value;
 
-    const data = {
-      email,
-      password,
-    };
-
-    console.log(data);
+    fetch('http://localhost:8000/auth/signin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    })
+      .then((res) => {
+        if (res.status === 403) {
+          alert('Wrong email or password');
+        } else if (res.status === 200) {
+          // handle successful login
+          alert('Login successful');
+          return res.json();
+        } else {
+          // handle other status codes
+        }
+      })
+      .then((data) => {
+        store.dispatch(setMerchant(data.merchant));
+        navigate('/');
+      })
+      .catch((error) => {
+        // handle fetch error
+      });
   };
   return (
     <AppPage>
@@ -39,7 +60,7 @@ export default function Signin() {
             <input
               type="email"
               id="email"
-              autoComplete="email"
+              autoComplete="off"
               className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
               placeholder="john.doe@company.com"
             />
@@ -66,6 +87,11 @@ export default function Signin() {
             Signin
           </button>
         </form>
+        <div className="mt-3 flex w-full cursor-pointer flex-col items-start">
+          <Link to={'/signup'}>
+            <span className="text-xs hover:text-neutral-500">Signup</span>
+          </Link>
+        </div>
       </div>
     </AppPage>
   );
