@@ -38,14 +38,20 @@ const body = (menu: IMenu, index: number) => {
 
 export default function Home(props: Props) {
   const state = store.getState();
+
   const merchant = state.merchant;
+  const token = state.auth;
 
   console.log(merchant);
+  console.log(token);
 
   const [menus, setMenus] = useState<IMenu[]>(menu);
+
+  useEffect(() => {}, []);
+
   return (
     <AppPage>
-      <div className="relative mt-9 w-5/6 overflow-x-auto shadow-md sm:rounded-lg">
+      <div className="relative mt-6 w-5/6 overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
           <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             <tr>

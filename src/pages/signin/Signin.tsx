@@ -1,6 +1,7 @@
 import React from 'react';
 import AppPage from '../../layouts/page/Page';
 import store from '../../redux/store';
+import { setToken } from '../../redux/auth';
 import { setMerchant } from '../../redux/merchant';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -14,7 +15,7 @@ export default function Signin() {
     const email = (form[0] as HTMLInputElement).value;
     const password = (form[1] as HTMLInputElement).value;
 
-    fetch('http://localhost:8000/auth/signin', {
+    fetch(`http://localhost:8000/auth/signin`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -35,6 +36,7 @@ export default function Signin() {
       })
       .then((data) => {
         store.dispatch(setMerchant(data.merchant));
+        store.dispatch(setToken(data.accessToken));
         navigate('/');
       })
       .catch((error) => {
