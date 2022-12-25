@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import AppPage from '../../layouts/appPage/AppPage';
 import FoodTable from '../../components/foodTable/FoodTable';
 import { store } from '../../redux/store';
+import { checkAuth } from '../../utils/checkAuth';
+import { useNavigate } from 'react-router-dom';
 
 export default function MyMenus() {
+  const navigate = useNavigate();
   const state = store.getState();
   const merchant = state.merchant;
   const auth = state.auth;
@@ -13,7 +16,7 @@ export default function MyMenus() {
   console.log('id', merchant.id);
   console.log('token', auth.token);
 
-  useEffect(() => {
+  const fetchMerchantMenus = (): void => {
     fetch(`http://localhost:8000/menu/merchant`, {
       method: 'POST',
       headers: {
@@ -25,15 +28,21 @@ export default function MyMenus() {
         if (response.status === 200) {
           return response.json();
         }
-        return Promise.reject(response);
+        return [];
       })
       .then((data) => {
-        // console.log('data', data);
         setMenus(data);
       })
       .catch((error) => {
         // handle fetch error
       });
+  };
+
+  useEffect(() => {
+    if (!checkAuth()) {
+      navigate('/signin');
+    }
+    fetchMerchantMenus();
   }, []);
 
   return (
