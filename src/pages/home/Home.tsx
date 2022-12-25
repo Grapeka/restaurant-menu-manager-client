@@ -3,7 +3,7 @@ import AppPage from '../../layouts/appPage/AppPage';
 import { IMenu } from '../../types/menu';
 import { menu } from '../../mocks/menu';
 import FoodTable from '../../components/foodTable/FoodTable';
-import store from '../../redux/store';
+import { store } from '../../redux/store';
 
 type Props = {};
 
@@ -43,8 +43,8 @@ export default function Home(props: Props) {
   const merchant = state.merchant;
   const token = state.auth;
 
-  // console.log(merchant);
-  // console.log(token);
+  console.log(merchant);
+  console.log(token);
 
   const [menus, setMenus] = useState<IMenu[]>([]);
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import AppPage from '../../layouts/page/Page';
-import store from '../../redux/store';
+import { store } from '../../redux/store';
 import { setToken } from '../../redux/auth';
 import { setMerchant } from '../../redux/merchant';
 import { Link, useNavigate } from 'react-router-dom';

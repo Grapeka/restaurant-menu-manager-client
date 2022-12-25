@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { IMenu } from '../../types/menu';
-import store from '../../redux/store';
+import { store } from '../../redux/store';
 
 type Props = {
   menus: IMenu[];
