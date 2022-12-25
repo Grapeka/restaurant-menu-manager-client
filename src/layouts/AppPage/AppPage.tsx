@@ -15,7 +15,7 @@ export default function AppPage(props: Props) {
       <SideBar />
       <div
         className={
-          'flex h-full w-4/5 flex-col items-center justify-start bg-gray-500'
+          'flex h-full w-full flex-col items-center justify-start bg-gray-500'
         }
       >
         {props.children}
