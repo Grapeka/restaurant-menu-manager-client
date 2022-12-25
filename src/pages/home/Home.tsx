@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AppPage from '../../layouts/appPage/AppPage';
 import { IMenu } from '../../types/menu';
 import { menu } from '../../mocks/menu';
+import FoodTable from '../../components/foodTable/FoodTable';
 import store from '../../redux/store';
 
 type Props = {};
@@ -42,43 +43,36 @@ export default function Home(props: Props) {
   const merchant = state.merchant;
   const token = state.auth;
 
-  console.log(merchant);
-  console.log(token);
+  // console.log(merchant);
+  // console.log(token);
 
-  const [menus, setMenus] = useState<IMenu[]>(menu);
+  const [menus, setMenus] = useState<IMenu[]>([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetch(`http://localhost:8000/menu`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          // handle other status codes
+        }
+      })
+      .then((data) => {
+        setMenus(data);
+      })
+      .catch((error) => {
+        // handle fetch error
+      });
+  }, []);
 
   return (
     <AppPage>
-      <div className="relative mt-6 w-5/6 overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-          <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="py-3 px-6">
-                Menu name
-              </th>
-              <th scope="col" className="py-3 px-6">
-                owner id
-              </th>
-              <th scope="col" className="py-3 px-6">
-                Category
-              </th>
-              <th scope="col" className="py-3 px-6">
-                Price
-              </th>
-              <th scope="col" className="py-3 px-6">
-                Image
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {menus.map((menu, index) => {
-              return body(menu, index);
-            })}
-          </tbody>
-        </table>
-      </div>
+      <FoodTable menus={menus} />
     </AppPage>
   );
 }
