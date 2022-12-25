@@ -18,29 +18,12 @@ export default function SideBar() {
         <ul className="space-y-2">
           <li>
             <a
-              href="#bro"
-              className="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-            >
-              <svg
-                aria-hidden="true"
-                className="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span className="ml-3 flex-1 whitespace-nowrap">Merchant</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="#bro"
-              className="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+              href="/"
+              className={`flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${
+                window.location.href === 'http://localhost:3000/'
+                  ? 'bg-gray-100 dark:bg-gray-700'
+                  : ''
+              }`}
             >
               <svg
                 aria-hidden="true"
@@ -60,8 +43,12 @@ export default function SideBar() {
           </li>
           <li>
             <a
-              href="#bro"
-              className="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+              href="/MyMenus"
+              className={`flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${
+                window.location.href === 'http://localhost:3000/MyMenus'
+                  ? 'bg-gray-100 dark:bg-gray-700'
+                  : ''
+              }`}
             >
               <svg
                 aria-hidden="true"
@@ -81,7 +68,32 @@ export default function SideBar() {
           </li>
           <li>
             <a
-              href="#bro"
+              href="/Merchant"
+              className={`flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${
+                window.location.href === 'http://localhost:3000/Merchant'
+                  ? 'bg-gray-100 dark:bg-gray-700'
+                  : ''
+              }`}
+            >
+              <svg
+                aria-hidden="true"
+                className="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span className="ml-3 flex-1 whitespace-nowrap">Merchant</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/signin"
               className="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
             >
               <svg
@@ -102,7 +114,7 @@ export default function SideBar() {
           </li>
           <li>
             <a
-              href="#bro"
+              href="/signup"
               className="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
             >
               <svg
