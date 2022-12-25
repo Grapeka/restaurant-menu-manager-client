@@ -43,7 +43,7 @@ export default function SideBar() {
           </li>
           <li>
             <a
-              href="/MyMenus"
+              href="/my-menus"
               className={`flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${
                 window.location.href === 'http://localhost:3000/MyMenus'
                   ? 'bg-gray-100 dark:bg-gray-700'
