@@ -1,10 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
-import merchantReducer from './merchant';
-import authReducer from './auth';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer } from 'redux-persist';
+import rootReducer from './reducer';
+import logger from 'redux-logger';
 
-export default configureStore({
-  reducer: {
-    merchant: merchantReducer,
-    auth: authReducer,
-  },
+const persistConfig = {
+  key: 'root',
+  version: 1,
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
