@@ -1,37 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import AppPage from '../../layouts/appPage/AppPage';
 import FoodTable from '../../components/foodTable/FoodTable';
-import store from '../../redux/store';
+import { store } from '../../redux/store';
 
 export default function MyMenus() {
   const state = store.getState();
   const merchant = state.merchant;
-  const token = state.auth;
+  const auth = state.auth;
 
   const [menus, setMenus] = useState([]);
 
-  console.log(merchant);
+  console.log('id', merchant.id);
+  console.log('token', auth.token);
 
   useEffect(() => {
-    // post and pass token
     fetch(`http://localhost:8000/menu/merchant`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${auth.token}`,
       },
-      body: JSON.stringify({
-        merchantId: merchant.id,
-      }),
     })
       .then((response) => {
         if (response.status === 200) {
           return response.json();
         }
+        return Promise.reject(response);
       })
       .then((data) => {
-        console.log(data);
-
+        // console.log('data', data);
         setMenus(data);
       })
       .catch((error) => {
