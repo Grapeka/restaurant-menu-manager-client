@@ -4,7 +4,7 @@ import { IMerchant } from '../types/merchant';
 export const merchantSlice = createSlice({
   name: 'merchant',
   initialState: {
-    id: 0,
+    id: '',
     name: '',
     email: '',
     password: '',
