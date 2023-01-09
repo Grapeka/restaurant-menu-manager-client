@@ -21,10 +21,10 @@ export default function FoodImageModal(props: Props) {
             <img
               className="h-auto max-w-full rounded-lg"
               src="https://www.eatthis.com/wp-content/uploads/sites/4/2020/12/unhealthiest-foods-planet.jpg?quality=82&strip=1"
-              alt="image description"
+              alt="Food"
             />
             <figcaption className="mt-2 text-center text-sm text-gray-500 dark:text-gray-400">
-              Image caption
+              {`Description...`}
             </figcaption>
           </figure>
           <button
