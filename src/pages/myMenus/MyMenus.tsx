@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import AppPage from '../../layouts/appPage/AppPage';
 import FoodTable from '../../components/foodTable/FoodTable';
 import { store } from '../../redux/store';
-import { checkAuth } from '../../utils/checkAuth';
 import { useNavigate } from 'react-router-dom';
 
 export default function MyMenus() {
@@ -39,7 +38,7 @@ export default function MyMenus() {
   };
 
   useEffect(() => {
-    if (!checkAuth()) {
+    if (auth.token === '') {
       navigate('/signin');
     }
     fetchMerchantMenus();
@@ -47,7 +46,7 @@ export default function MyMenus() {
 
   return (
     <AppPage>
-      <FoodTable menus={menus} />
+      <FoodTable menus={menus} lastBookElementRef={null} />
     </AppPage>
   );
 }
