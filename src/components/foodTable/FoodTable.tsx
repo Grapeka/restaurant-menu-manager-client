@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { IMenu } from '../../types/menu';
-import { store } from '../../redux/store';
 import FoodImageModal from '../foodImgModal/FoodImageModal';
 
 type Props = {
   menus: IMenu[];
+  lastBookElementRef: React.RefCallback<HTMLDivElement | null> | null;
 };
 
 export default function FoodTable(props: Props) {
@@ -71,7 +71,43 @@ export default function FoodTable(props: Props) {
         </thead>
         <tbody>
           {props.menus.map((menu, index) => {
-            return body(menu, index);
+            if (props.menus.length === index + 1) {
+              return (
+                <tr
+                  ref={props.lastBookElementRef}
+                  className="border-b bg-white dark:border-gray-700 dark:bg-gray-800"
+                  key={index}
+                >
+                  <th
+                    scope="row"
+                    className="whitespace-nowrap py-4 px-6 font-medium text-gray-900 dark:text-white"
+                  >
+                    {menu.name}
+                  </th>
+                  <td className="py-4 px-6">{menu.ownerId}</td>
+                  <td className="py-4 px-6">{menu.category}</td>
+                  <td className="py-4 px-6">{menu.price}$</td>
+                  <td
+                    onClick={() => {
+                      setSelectedMenu(menu);
+                    }}
+                    className="cursor-pointer py-4 px-6"
+                  >
+                    <img
+                      className="h-10 w-10 rounded"
+                      src={
+                        menu.image !== ''
+                          ? menu.image
+                          : 'https://www.eatthis.com/wp-content/uploads/sites/4/2020/12/unhealthiest-foods-planet.jpg?quality=82&strip=1'
+                      }
+                      alt="Food"
+                    />
+                  </td>
+                </tr>
+              );
+            } else {
+              return body(menu, index);
+            }
           })}
         </tbody>
       </table>
