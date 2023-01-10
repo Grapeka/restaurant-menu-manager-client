@@ -36,7 +36,7 @@ export default function Signup(): JSX.Element {
       .then((res) => {
         if (res.status === 403) {
           alert('Email already exists');
-        } else if (res.status === 200) {
+        } else if (res.status === 201) {
           // handle successful login
           alert('Signup successful');
           return res.json();
