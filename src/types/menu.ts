@@ -1,5 +1,7 @@
+import { IMerchant } from './merchant';
+
 export interface IMenu {
-  ownerId: number;
+  ownerId: IMerchant;
   id: number;
   name: string;
   description: string;
