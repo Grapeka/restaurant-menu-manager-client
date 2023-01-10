@@ -7,13 +7,9 @@ import { useNavigate } from 'react-router-dom';
 export default function MyMenus() {
   const navigate = useNavigate();
   const state = store.getState();
-  const merchant = state.merchant;
   const auth = state.auth;
 
   const [menus, setMenus] = useState([]);
-
-  console.log('id', merchant.id);
-  console.log('token', auth.token);
 
   const fetchMerchantMenus = (): void => {
     fetch(`http://localhost:8000/menu/merchant`, {
