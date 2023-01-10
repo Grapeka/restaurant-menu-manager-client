@@ -23,7 +23,7 @@ export default function FoodTable(props: Props) {
         >
           {menu.name}
         </th>
-        <td className="py-4 px-6">{menu.ownerId}</td>
+        <td className="py-4 px-6">{menu.ownerId.name}</td>
         <td className="py-4 px-6">{menu.category}</td>
         <td className="py-4 px-6">{menu.price}$</td>
         <td
@@ -57,7 +57,7 @@ export default function FoodTable(props: Props) {
               Menu name
             </th>
             <th scope="col" className="py-3 px-6">
-              owner id
+              Owner name
             </th>
             <th scope="col" className="py-3 px-6">
               Category
@@ -87,7 +87,7 @@ export default function FoodTable(props: Props) {
                   >
                     {menu.name}
                   </th>
-                  <td className="py-4 px-6">{menu.ownerId}</td>
+                  <td className="py-4 px-6">{menu.ownerId?.name}</td>
                   <td className="py-4 px-6">{menu.category}</td>
                   <td className="py-4 px-6">{menu.price}$</td>
                   <td
