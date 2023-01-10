@@ -1,5 +1,6 @@
 import React from 'react';
 import { IMenu } from '../../types/menu';
+import { API_URL } from '../../config';
 
 type Props = {
   menu: IMenu | null;
@@ -7,6 +8,8 @@ type Props = {
 };
 
 export default function FoodImageModal(props: Props) {
+  console.log('test', props.menu);
+
   return (
     <div
       id="popup-modal"
@@ -20,11 +23,15 @@ export default function FoodImageModal(props: Props) {
           <figure className="max-w-lg">
             <img
               className="h-auto max-w-full rounded-lg"
-              src="https://www.eatthis.com/wp-content/uploads/sites/4/2020/12/unhealthiest-foods-planet.jpg?quality=82&strip=1"
+              src={
+                props.menu !== null
+                  ? `${API_URL}/file/${props.menu.image}`
+                  : 'https://www.eatthis.com/wp-content/uploads/sites/4/2020/12/unhealthiest-foods-planet.jpg?quality=82&strip=1'
+              }
               alt="Food"
             />
             <figcaption className="mt-2 text-center text-sm text-gray-500 dark:text-gray-400">
-              {`Description...`}
+              {props.menu !== null ? props.menu.description : ''}
             </figcaption>
           </figure>
           <button

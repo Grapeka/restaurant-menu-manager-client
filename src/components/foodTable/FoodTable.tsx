@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { IMenu } from '../../types/menu';
 import FoodImageModal from '../foodImgModal/FoodImageModal';
+import { API_URL } from '../../config';
 
 type Props = {
   menus: IMenu[];
@@ -34,8 +35,8 @@ export default function FoodTable(props: Props) {
           <img
             className="h-10 w-10 rounded"
             src={
-              menu.image !== ''
-                ? menu.image
+              menu.image !== null
+                ? `${API_URL}/file/${menu.image}`
                 : 'https://www.eatthis.com/wp-content/uploads/sites/4/2020/12/unhealthiest-foods-planet.jpg?quality=82&strip=1'
             }
             alt="Food"
@@ -98,8 +99,8 @@ export default function FoodTable(props: Props) {
                     <img
                       className="h-10 w-10 rounded"
                       src={
-                        menu.image !== ''
-                          ? menu.image
+                        menu.image !== null
+                          ? `${API_URL}/file/${menu.image}`
                           : 'https://www.eatthis.com/wp-content/uploads/sites/4/2020/12/unhealthiest-foods-planet.jpg?quality=82&strip=1'
                       }
                       alt="Food"
