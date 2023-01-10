@@ -3,38 +3,44 @@ import AppPage from '../../layouts/appPage/AppPage';
 import { API_URL } from '../../config';
 import { store } from '../../redux/store';
 import axios from 'axios';
+import { uploadImage } from '../../utils/uploadImage';
 
 export default function Create() {
   const state = store.getState();
   const auth = state.auth;
   const merchant = state.merchant;
   const [image, setImage] = useState('');
+  const [uploadFile, setUploadFile] = useState<File | null>(null);
   const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
-  function handleFileChange(event: any) {
+  const handleFileChange = (event: any): Boolean => {
     const file = event.target.files[0];
     console.log(file);
 
     if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
       alert('Only PNG and JPG files are allowed');
-      return;
+      return false;
     }
     if (file.size > MAX_FILE_SIZE) {
       alert('File size should be less than or equal to 5 MB');
-      return;
+      return false;
     }
     const img = document.createElement('img');
     img.src = URL.createObjectURL(file);
     setImage(img.src);
-  }
+    return true;
+  };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     const form = event.target as HTMLFormElement;
 
     const nameVal = (form[1] as HTMLInputElement).value;
     const priceVal = (form[2] as HTMLInputElement).value;
     const categoryVal = (form[3] as HTMLInputElement).value;
     const descriptionVal = (form[4] as HTMLInputElement).value;
+
+    const imageFilename = await uploadImage(uploadFile);
 
     axios({
       method: 'POST',
@@ -48,7 +54,7 @@ export default function Create() {
         category: categoryVal,
         description: descriptionVal,
         ownerId: merchant.id,
-        image: '',
+        image: imageFilename,
       },
     })
       .then((res) => {
@@ -116,7 +122,12 @@ export default function Create() {
                   id="dropzone-file"
                   type="file"
                   className="hidden"
-                  onChange={handleFileChange}
+                  onChange={(e) => {
+                    const isPass = handleFileChange(e);
+                    if (isPass && e.target.files !== null) {
+                      setUploadFile(e.target.files[0]);
+                    }
+                  }}
                 />
               </label>
             </div>
@@ -163,7 +174,9 @@ export default function Create() {
                 required
                 className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
               >
-                <option value="Main dishes">Main dishes</option>
+                <option selected value="Main dishes">
+                  Main dishes
+                </option>
                 <option value="Appetizers">Appetizers</option>
                 <option value="Desserts">Desserts</option>
                 <option value="Beverages">Beverages</option>
