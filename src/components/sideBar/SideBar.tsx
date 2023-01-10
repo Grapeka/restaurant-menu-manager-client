@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { WEB_URL } from '../../config';
 import { logout } from '../../utils/logout';
 import { store } from '../../redux/store';
+import { checkAuth } from '../../utils/checkAuth';
 export default function SideBar() {
   const state = store.getState();
-  const merchant = state.merchant;
   const auth = state.auth;
 
   const [sideBarMenu, setSideBarMenu] = useState({
@@ -16,9 +16,9 @@ export default function SideBar() {
     Logout: false,
   });
 
-  useEffect(() => {
-    // check merchant or not
-    if (auth.token === '') {
+  const checkUser = async () => {
+    const result = await checkAuth(auth.token);
+    if (result === false) {
       setSideBarMenu({
         AllMenus: true,
         MyMenus: false,
@@ -28,15 +28,6 @@ export default function SideBar() {
         Logout: false,
       });
     } else {
-      console.log({
-        AllMenus: true,
-        MyMenus: true,
-        Create: true,
-        Signin: false,
-        Signup: false,
-        Logout: true,
-      });
-
       setSideBarMenu({
         AllMenus: true,
         MyMenus: true,
@@ -46,6 +37,12 @@ export default function SideBar() {
         Logout: true,
       });
     }
+    return result;
+  };
+
+  useEffect(() => {
+    // check merchant or not
+    checkUser();
   }, []);
   return (
     <aside className="h-full w-1/5 max-w-xs bg-gray-50" aria-label="Sidebar">
