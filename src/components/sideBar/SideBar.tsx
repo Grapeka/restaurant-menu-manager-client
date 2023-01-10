@@ -41,7 +41,6 @@ export default function SideBar() {
   };
 
   useEffect(() => {
-    // check merchant or not
     checkUser();
   }, []);
   return (
