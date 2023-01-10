@@ -10,7 +10,7 @@ export default function SideBar() {
   const [sideBarMenu, setSideBarMenu] = useState({
     AllMenus: true,
     MyMenus: true,
-    Merchant: true,
+    Create: true,
     Signin: true,
     Signup: true,
     Logout: false,
@@ -22,7 +22,7 @@ export default function SideBar() {
       setSideBarMenu({
         AllMenus: true,
         MyMenus: false,
-        Merchant: false,
+        Create: false,
         Signin: true,
         Signup: true,
         Logout: false,
@@ -31,7 +31,7 @@ export default function SideBar() {
       console.log({
         AllMenus: true,
         MyMenus: true,
-        Merchant: true,
+        Create: true,
         Signin: false,
         Signup: false,
         Logout: true,
@@ -40,7 +40,7 @@ export default function SideBar() {
       setSideBarMenu({
         AllMenus: true,
         MyMenus: true,
-        Merchant: true,
+        Create: true,
         Signin: false,
         Signup: false,
         Logout: true,
@@ -116,9 +116,9 @@ export default function SideBar() {
           </li>
           <li>
             <a
-              href={sideBarMenu.Merchant ? '/merchant' : '/signin'}
+              href={sideBarMenu.Create ? '/create' : '/signin'}
               className={`flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${
-                window.location.href === 'http://localhost:3000/Merchant'
+                window.location.href === 'http://localhost:3000/create'
                   ? 'bg-gray-100 dark:bg-gray-700'
                   : ''
               }`}
@@ -136,7 +136,7 @@ export default function SideBar() {
                   clipRule="evenodd"
                 />
               </svg>
-              <span className="ml-3 flex-1 whitespace-nowrap">Merchant</span>
+              <span className="ml-3 flex-1 whitespace-nowrap">Create</span>
             </a>
           </li>
           {sideBarMenu.Signin ? (
