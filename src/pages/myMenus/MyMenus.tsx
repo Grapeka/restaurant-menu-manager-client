@@ -46,7 +46,7 @@ export default function MyMenus() {
 
   return (
     <AppPage>
-      <FoodTable menus={menus} lastBookElementRef={null} />
+      <FoodTable menus={menus} />
     </AppPage>
   );
 }
