@@ -4,7 +4,7 @@ import FoodImageModal from '../foodImgModal/FoodImageModal';
 
 type Props = {
   menus: IMenu[];
-  lastBookElementRef: React.RefCallback<HTMLDivElement | null> | null;
+  lastBookElementRef?: React.RefCallback<HTMLDivElement | null> | null;
 };
 
 export default function FoodTable(props: Props) {
@@ -74,7 +74,9 @@ export default function FoodTable(props: Props) {
             if (props.menus.length === index + 1) {
               return (
                 <tr
-                  ref={props.lastBookElementRef}
+                  ref={
+                    props.lastBookElementRef ? props.lastBookElementRef : null
+                  }
                   className="border-b bg-white dark:border-gray-700 dark:bg-gray-800"
                   key={index}
                 >
