@@ -1,10 +1,21 @@
-import { store } from '../redux/store';
+import axios from 'axios';
+import { API_URL } from '../config';
 
-const state = store.getState();
+export const checkAuth = async (token: string): Promise<Boolean> => {
+  try {
+    const response = await axios({
+      method: 'POST',
+      url: `${API_URL}/auth/user`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-export function checkAuth(): boolean {
-  if (state.auth) {
+    console.log(response.data);
     return true;
+  } catch (error) {
+    console.log('err', error);
+
+    return false;
   }
-  return false;
-}
+};
