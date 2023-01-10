@@ -7,7 +7,7 @@ export const logout = (): void => {
   store.dispatch(setToken(''));
   store.dispatch(
     setMerchant({
-      id: '',
+      _id: '',
       name: '',
       email: '',
       password: '',

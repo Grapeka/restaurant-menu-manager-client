@@ -53,7 +53,7 @@ export default function Create() {
         price: parseInt(priceVal),
         category: categoryVal,
         description: descriptionVal,
-        ownerId: merchant.id,
+        ownerId: merchant._id,
         image: imageFilename,
       },
     })
