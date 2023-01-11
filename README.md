@@ -1,46 +1,39 @@
-# Getting Started with Create React App
+# Restaurant Menu Manager
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the Restaurant Menu Manager! With this tool, merchants can easily manage their food menu, as well as browse and explore menus from other merchants.
 
-## Available Scripts
+This repository contains the frontend code for the platform. The corresponding backend repository can be found at the following link: https://github.com/Grapeka/restaurant-menu-manager-server.git
 
-In the project directory, you can run:
+## Features
 
-### `yarn start`
+The following features are available to users:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Merchants
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- View all menus, including your own and those from other merchants
+- Create and delete items on your own menu
+- Sign up to use the software and manage your own restaurant's menu
 
-### `yarn test`
+Users
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- View all menus
 
-### `yarn build`
+## Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To get started with the restaurant-menu-manager-server, follow the steps below:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```sh
+# Clone the repository to your local machine
+git clone https://github.com/Grapeka/restaurant-menu-manager-client.git
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Install the dependencies
+yarn install
 
-### `yarn eject`
+# Build the project
+yarn build
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Start the server
+yarn start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+You can now access the application at http://localhost:3000
