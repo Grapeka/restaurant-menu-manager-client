@@ -3,7 +3,7 @@ import { API_URL } from '../config';
 
 export const checkAuth = async (token: string): Promise<Boolean> => {
   try {
-    const response = await axios({
+    axios({
       method: 'POST',
       url: `${API_URL}/auth/user`,
       headers: {
@@ -13,7 +13,6 @@ export const checkAuth = async (token: string): Promise<Boolean> => {
     return true;
   } catch (error) {
     console.log('err', error);
-
     return false;
   }
 };
