@@ -3,6 +3,8 @@ import AppPage from '../../layouts/appPage/AppPage';
 import FoodTable from '../../components/foodTable/FoodTable';
 import { store } from '../../redux/store';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../../config';
+import axios from 'axios';
 
 export default function MyMenus() {
   const navigate = useNavigate();
@@ -11,33 +13,27 @@ export default function MyMenus() {
 
   const [menus, setMenus] = useState([]);
 
-  const fetchMerchantMenus = (): void => {
-    fetch(`http://localhost:8000/menu/merchant`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${auth.token}`,
-      },
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        }
-        return [];
-      })
-      .then((data) => {
-        setMenus(data);
-      })
-      .catch((error) => {
-        // handle fetch error
-      });
-  };
-
   useEffect(() => {
     if (auth.token === '') {
       navigate('/signin');
     }
-    fetchMerchantMenus();
+    try {
+      axios({
+        method: 'POST',
+        url: `${API_URL}/menu/merchant`,
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+        },
+      }).then((response) => {
+        if (response.status === 200) {
+          setMenus(response.data);
+        } else {
+          // handle error
+        }
+      });
+    } catch (error) {
+      // handle error
+    }
   }, []);
 
   return (

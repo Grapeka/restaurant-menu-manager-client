@@ -4,6 +4,8 @@ import { store } from '../../redux/store';
 import { setToken } from '../../redux/auth';
 import { setMerchant } from '../../redux/merchant';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_URL } from '../../config';
+import axios from 'axios';
 
 export default function Signin() {
   const navigate = useNavigate();
@@ -14,34 +16,27 @@ export default function Signin() {
 
     const email = (form[0] as HTMLInputElement).value;
     const password = (form[1] as HTMLInputElement).value;
-
-    fetch(`http://localhost:8000/auth/signin`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    })
-      .then((res) => {
-        if (res.status === 403) {
-          alert('Wrong email or password');
-        } else if (res.status === 200) {
-          // handle successful login
+    try {
+      axios({
+        method: 'POST',
+        url: `${API_URL}/auth/signin`,
+        data: {
+          email,
+          password,
+        },
+      }).then((response) => {
+        if (response.status === 200) {
           alert('Login successful');
-          return res.json();
-        } else {
-          // handle other status codes
+          store.dispatch(setMerchant(response.data.merchant));
+          store.dispatch(setToken(response.data.accessToken));
+          navigate('/');
+        } else if (response.status === 403) {
+          alert('Wrong email or password');
         }
-      })
-      .then((data) => {
-        store.dispatch(setMerchant(data.merchant));
-        store.dispatch(setToken(data.accessToken));
-        navigate('/');
-      })
-      .catch((error) => {
-        // handle fetch error
       });
+    } catch (error) {
+      // handle error
+    }
   };
   return (
     <AppPage>

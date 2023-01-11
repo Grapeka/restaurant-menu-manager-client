@@ -10,8 +10,6 @@ export const checkAuth = async (token: string): Promise<Boolean> => {
         Authorization: `Bearer ${token}`,
       },
     });
-
-    console.log(response.data);
     return true;
   } catch (error) {
     console.log('err', error);
